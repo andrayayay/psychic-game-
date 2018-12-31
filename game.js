@@ -16,22 +16,36 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 document.onkeyup = function(event) {
     guessesLeft--;
 
-// this turns usersGuess into corresponding keys (otherwise we would see them come up as numbers),
+// string.fromCharCode turns usersGuess into corresponding keys (otherwise we would see them come up as numbers),
 // must also use .toLowerCase(); function because otherwise letters come out capitalized
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
 //if statement that prevents user from choosing a key that's not part of the alphabet (a = unicode 65, z = unicode 90)
+// (however an incorrect response still counts as a guess and will show as 'letterGuessed)
 if (event.keyCode < 65 || event.keyCode > 90) {
-    alert("Invalid Entry");
+    alert("Please enter a letter!");
 }
 
 //else if statement to stop user from guessing a letter they already guessed
 else if (userChoice.indexOf(userGuess) >=0) {
-            alert("You already guessed that!");
+            alert("You already guessed that letter!");
 }
+
+// declaring countGuessesLeft, countUsersGuesses, and restart functions
+countGuessesLeft();
+countUsersGuesses();
+
+// declare same variables as when starting the game
+var restart = function() {
+    guessesLeft = 9;
+    userChoice = [];
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+}
+
 
 // pushes the user's guess into our empty userChoice array
     userChoice.push(userGuess);
+
     function countGuessesLeft() {
         document.getElementById("guessesLeft").innerHTML = "Guesses Left: " + guessesLeft;
     }
@@ -40,17 +54,7 @@ else if (userChoice.indexOf(userGuess) >=0) {
         document.getElementById("lettersGuessed").innerHTML = "Your Guesses so far: " + userChoice.join(' ');
     }
 
-// declaring countGuessesLeft, countUsersGuesses, and restart functions
-countGuessesLeft();
-countUsersGuesses();
 
-// declare same variables as when starting the game
- var restart = function() {
-        guessesLeft = 9;
-        userChoice = [];
-        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    }
-    
 // if userGuess equals computer guess..
     // add one to wins and document.interHTML
         // restart game after win
