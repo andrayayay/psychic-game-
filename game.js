@@ -16,7 +16,7 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 document.onkeyup = function(event) {
     guessesLeft--;
 
-// string.fromCharCode turns usersGuess into corresponding keys (otherwise we would see them come up as numbers),
+// string.fromCharCode turns usersGuess into corresponding keys (otherwise we would see them come up as numbers), 
 // must also use .toLowerCase(); function because otherwise letters come out capitalized
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
@@ -27,7 +27,7 @@ if (event.keyCode < 65 || event.keyCode > 90) {
 }
 
 //else if statement to stop user from guessing a letter they already guessed
-else if (userChoice.indexOf(userGuess) >=0) {
+else if (userChoice.indexOf(userGuess) >= 0) {
             alert("You already guessed that letter!");
 }
 
